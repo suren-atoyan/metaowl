@@ -1,8 +1,8 @@
-<a href="http://react-pwa.surenatoyan.com/" target="_blank" rel="noreferrer">
+<a href="http://metaowl.surenatoyan.com/" target="_blank" rel="noreferrer">
  <img src="./public/cover.png" title="Base App">
 </a>
 
-# React-PWA - `v2` is here 🚀🎉⚡️
+# metaowl - `v2` is here 🚀🎉⚡️
 
 **Starter kit for modern web applications!**
 
@@ -44,7 +44,7 @@ Almost all projects need to have a router, a UI framework, store integration, th
 
 #### Vite
 
-[Vite](https://vitejs.dev/) is a blazingly fast build tool based on [native ES modules](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/), [rollup](https://rollupjs.org/guide/en/), and [esbuild](https://esbuild.github.io/). `React-PWA` v1 was based on [CRA](https://reactjs.org/docs/create-a-new-react-app.html). We still love `CRA` and really think it's a great tool, but `Vite` provides a much better developer experience and it's unconditionally faster (maybe, we will also create a `CRA` version of `React-PWA` v2 in near future).
+[Vite](https://vitejs.dev/) is a blazingly fast build tool based on [native ES modules](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/), [rollup](https://rollupjs.org/guide/en/), and [esbuild](https://esbuild.github.io/). `metaowl` v1 was based on [CRA](https://reactjs.org/docs/create-a-new-react-app.html). We still love `CRA` and really think it's a great tool, but `Vite` provides a much better developer experience and it's unconditionally faster (maybe, we will also create a `CRA` version of `metaowl` v2 in near future).
 
 #### React
 
@@ -266,7 +266,7 @@ There are two more scripts:
 - `preview` command will boot up local static web server that serves the files from `dist` folder. It's an easy way to check if the production build looks OK in your local environment.
 - `https-preview` is the same, but with HTTPS. It's handy for testing your PWA capabilities in your local environment.
 
-## [Live Demo](https://react-pwa.surenatoyan.com/)
+## [Live Demo](https://metaowl.surenatoyan.com/)
 
 <div>
  <img src="./public/demo-dark.png" width="280" title="Dark demo"> <img src="./public/demo-light.png" width="280" title="Light demo">
