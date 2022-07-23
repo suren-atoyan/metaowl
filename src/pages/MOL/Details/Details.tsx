@@ -9,7 +9,7 @@ function Details() {
       sx={{
         height: '100%',
         backgroundColor: '#C95962',
-        py: '150px',
+        pt: '150px',
         px: '50px',
         display: 'flex',
         justifyContent: 'space-between',
