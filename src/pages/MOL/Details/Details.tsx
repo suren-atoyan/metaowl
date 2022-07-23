@@ -14,6 +14,7 @@ function Details() {
         display: 'flex',
         justifyContent: 'space-between',
       }}
+      id="details"
     >
       <About />
       <Examples />

@@ -14,6 +14,7 @@ function Welcome() {
         alignItems: 'center',
         position: 'relative',
       }}
+      id="welcome"
     >
       <img src={title} style={{ width: '84%', height: 'fit-content' }} />
       <img
