@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Root = styled.div<{ isMobile: boolean }>`
-  height: ${({ isMobile }) => (isMobile ? 70 : 50)}px;
+  height: ${({ isMobile }) => (isMobile ? 70 : 54)}px;
   padding: ${({ isMobile }) => (isMobile ? '5px 20' : 5)}px;
   border-radius: ${({ isMobile }) => (isMobile ? 0 : 50)}px;
   position: fixed;
@@ -12,7 +12,7 @@ export const Root = styled.div<{ isMobile: boolean }>`
         left: 0;
     `
       : `
-        top: 2rem;
+        top: 20px;
         right: 5rem;
     `}
   z-index: 100;
@@ -44,8 +44,8 @@ export const StartStop = styled.button<{ isMobile: boolean; played: boolean }>`
   z-index: 1;
   border: 0;
   cursor: pointer;
-  width: ${({ isMobile }) => (isMobile ? 50 : 40)}px;
-  height: ${({ isMobile }) => (isMobile ? 50 : 40)}px;
+  width: ${({ isMobile }) => (isMobile ? 50 : 44)}px;
+  height: ${({ isMobile }) => (isMobile ? 50 : 44)}px;
   border-radius: 50%;
   background: #a31f22;
   display: flex;
