@@ -30,7 +30,7 @@ function PageSwitcher() {
 
       setTimeout(() => {
         setStopObserver(false);
-      }, 200);
+      }, 350);
     };
   }
 
