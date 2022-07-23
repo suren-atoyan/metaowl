@@ -13,7 +13,7 @@ function Details() {
     query: '(min-width: 2150px)',
   });
   const isBigScreen = useMediaQuery({
-    query: '(min-width: 1700px)',
+    query: '(min-width: 1680px)',
   });
   const isMidScreen = useMediaQuery({
     query: '(min-width: 1010px)',

@@ -65,9 +65,10 @@ function Examples({
 }: {
   isSingleLine?: boolean;
   isHugeScreen?: boolean;
+  isMidScreen?: boolean;
 }) {
   const margin = isHugeScreen ? '100px' : '50px';
-  const size = isHugeScreen ? 350 : 255;
+  const size = isHugeScreen ? 350 : 200;
 
   if (isSingleLine) {
     return (

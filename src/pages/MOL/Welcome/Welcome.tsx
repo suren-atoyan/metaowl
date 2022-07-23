@@ -7,7 +7,7 @@ import trio from '@/assets/images/trio.svg';
 
 function Welcome() {
   const isBigScreen = useMediaQuery({
-    query: '(min-width: 1700px)',
+    query: '(min-width: 1681px)',
   });
   const isMidScreen = useMediaQuery({
     query: '(min-width: 820px)',
