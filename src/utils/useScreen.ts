@@ -1,9 +1,17 @@
 import { useMediaQuery } from 'react-responsive';
 
 const useScreen = () => {
-  const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
+  const isBigScreen = useMediaQuery({
+    query: '(min-width: 1681px)',
+  });
+  const isMidScreen = useMediaQuery({
+    query: '(min-width: 801px)',
+  });
+  const isMobile = useMediaQuery({ query: `(max-width: 800px)` });
 
   return {
+    isBigScreen,
+    isMidScreen,
     isMobile,
   };
 };

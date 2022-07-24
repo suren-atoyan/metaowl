@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
+
+import usePageSwitcher from '@/store/mol';
+import { Pages } from '@/store/mol/types';
 
 const Dot = styled(Box)<{ active: boolean }>(({ active }) => ({
   width: 14,
@@ -14,70 +15,8 @@ const Dot = styled(Box)<{ active: boolean }>(({ active }) => ({
   cursor: 'pointer',
 }));
 
-enum Pages {
-  Welcome = 'welcome',
-  Details = 'details',
-}
-
 function PageSwitcher() {
-  const [activePage, setActivePage] = useState<Pages>(Pages.Welcome);
-  const [stopObserver, setStopObserver] = useState<boolean>(false);
-
-  function switchPage(page: Pages) {
-    return () => {
-      setActivePage(page);
-      setStopObserver(true);
-
-      setTimeout(() => {
-        setStopObserver(false);
-      }, 350);
-    };
-  }
-
-  useEffect(() => {
-    const page = document.getElementById(activePage);
-    page?.scrollIntoView({ behavior: 'smooth' });
-  }, [activePage]);
-
-  useEffect(() => {
-    const welcomePage = document.getElementById(Pages.Welcome) as HTMLElement;
-
-    const intersectionObserver = new IntersectionObserver(
-      function (entries) {
-        if (entries?.[0].intersectionRatio < 0.12 && !stopObserver) {
-          setActivePage(Pages.Details);
-        }
-      },
-      { root: document, threshold: 0.1 },
-    );
-
-    // start observing
-    intersectionObserver.observe(welcomePage);
-
-    return () => {
-      intersectionObserver.unobserve(welcomePage);
-    };
-  }, [stopObserver]);
-
-  useEffect(() => {
-    const detailsPage = document.getElementById(Pages.Details) as HTMLElement;
-
-    const intersectionObserver = new IntersectionObserver(
-      function (entries) {
-        if (entries?.[0].intersectionRatio < 0.12 && !stopObserver) {
-          setActivePage(Pages.Welcome);
-        }
-      },
-      { root: document, threshold: 0.1 },
-    );
-
-    // start observing
-    intersectionObserver.observe(detailsPage);
-
-    return () => {
-      intersectionObserver.unobserve(detailsPage);
-    };
-  }, [stopObserver]);
+  const [activePage, { switchPage }] = usePageSwitcher();
 
   return (
     <Box
@@ -92,7 +31,7 @@ function PageSwitcher() {
     >
       <Box>
         {Object.values(Pages).map((page) => (
-          <Dot active={page === activePage} key={page} onClick={switchPage(page)} />
+          <Dot active={page === activePage} key={page} onClick={() => switchPage(page)} />
         ))}
       </Box>
     </Box>

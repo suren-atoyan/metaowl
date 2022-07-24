@@ -9,6 +9,8 @@ import MuiIconButton, { IconButtonProps } from '@mui/material/IconButton';
 
 import logo from '@/assets/images/logo.svg';
 import openseaIcon from '@/assets/images/opensea.svg';
+import usePageSwitcher from '@/store/mol';
+import { Pages } from '@/store/mol/types';
 import useScreen from '@/utils/useScreen';
 
 const CustomIcon = styled('img')({});
@@ -21,6 +23,7 @@ const IconButton: FC<IconButtonProps & { href?: string; target?: string }> = sty
 
 function Header() {
   const { isMobile } = useScreen();
+  const [activePage, { switchPage }] = usePageSwitcher();
 
   return (
     <Box
@@ -32,12 +35,16 @@ function Header() {
         justifyContent: isMobile ? 'space-between' : 'center',
         alignItems: 'center',
         zIndex: 2,
-        backgroundColor: isMobile ? '#bf5663' : 'inherit',
+        backgroundColor: isMobile
+          ? activePage === Pages.Welcome
+            ? '#E2DFDE'
+            : '#bf5663'
+          : 'inherit',
         height: 90,
         px: 5,
       }}
     >
-      <IconButton sx={{ ml: 0 }}>
+      <IconButton onClick={() => switchPage(Pages.Welcome)} sx={{ ml: 0 }}>
         <CustomIcon sx={{ width: 44, height: 44 }} src={logo} />
       </IconButton>
       <IconButton href="https://opensea.io/collection/meta-owl-1" target="_blink">

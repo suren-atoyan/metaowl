@@ -1,22 +1,14 @@
-import { useMediaQuery } from 'react-responsive';
-
 import Box from '@mui/material/Box';
 
 import title from '@/assets/images/title.svg';
+import titleMobile from '@/assets/images/title_mobile.svg';
 import trio from '@/assets/images/trio.svg';
+import useScreen from '@/utils/useScreen';
 
 function Welcome() {
-  const isBigScreen = useMediaQuery({
-    query: '(min-width: 1681px)',
-  });
-  const isMidScreen = useMediaQuery({
-    query: '(min-width: 820px)',
-  });
-  const isMobile = useMediaQuery({
-    query: '(max-width: 820px)',
-  });
+  const { isBigScreen, isMidScreen, isMobile } = useScreen();
 
-  const trioWidth = isBigScreen ? '30%' : isMidScreen ? '40%' : isMobile ? '70%' : '30%';
+  const trioWidth = isBigScreen ? '30%' : isMidScreen ? '40%' : isMobile ? '120%' : '30%';
 
   return (
     <Box
@@ -27,13 +19,20 @@ function Welcome() {
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
+        overflow: 'hidden',
       }}
       id="welcome"
     >
-      <img src={title} style={{ width: '84%', height: 'fit-content' }} />
+      <img src={isMobile ? titleMobile : title} style={{ width: '84%', height: 'fit-content' }} />
       <img
         src={trio}
-        style={{ position: 'absolute', bottom: 0, right: 0, width: trioWidth, marginRight: '5%' }}
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          width: trioWidth,
+          marginRight: isMobile ? '-10%' : '5%',
+        }}
       />
     </Box>
   );

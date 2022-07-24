@@ -40,11 +40,11 @@ const Image = styled('img')({
 //   },
 // ];
 
-function NFT({ src, title, size }: { src: string; title: string; size: number }) {
+function NFT({ src, title, size }: { src: string; title: string; size: string }) {
   return (
     <Box sx={{ display: 'inline-block' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Image width={size} height={size} src={src} alt={title} />
+        <Image style={{ width: size, height: size }} src={src} alt={title} />
         <Typography
           color="#eeeae7"
           sx={{ mt: 1, fontSize: 9, fontFamily: 'Arial Rounded MT Bold' }}
@@ -59,18 +59,11 @@ function NFT({ src, title, size }: { src: string; title: string; size: number })
   );
 }
 
-function Examples({
-  isSingleLine,
-  isHugeScreen,
-}: {
-  isSingleLine?: boolean;
-  isHugeScreen?: boolean;
-  isMidScreen?: boolean;
-}) {
-  const margin = isHugeScreen ? '100px' : '50px';
-  const size = isHugeScreen ? 350 : 200;
+function Examples({ isMobile }: { isMobile?: boolean }) {
+  const margin = isMobile ? '50px' : '3vw';
+  const size = isMobile ? '255px' : '12vw';
 
-  if (isSingleLine) {
+  if (isMobile) {
     return (
       <Box
         sx={{
@@ -93,7 +86,7 @@ function Examples({
   }
 
   return (
-    <Box display="flex" flexDirection="column">
+    <Box display="flex" flexDirection="column" alignItems="center" flex={1}>
       <Box
         sx={{
           mb: 5,
