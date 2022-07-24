@@ -34,7 +34,7 @@ function Details() {
           alignItems: 'center',
         }}
       >
-        <Title isMobile={isMobile} sx={{ mb: 10 }} />
+        <Title isMobile={isMobile} sx={{ mb: 5 }} />
         <Examples isTablet={isTablet} isMobile={isMobile} />
         <About />
       </Box>
