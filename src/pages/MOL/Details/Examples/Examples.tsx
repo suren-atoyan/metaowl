@@ -27,11 +27,11 @@ function NFT({ src, title, size }: { src: string; title: string; size: string })
         <Image src={src} alt={title} />
         <Typography
           color="#eeeae7"
-          sx={{ mt: 1, fontSize: 9, fontFamily: 'Arial Rounded MT Bold' }}
+          sx={{ mt: 1, fontSize: 9, fontFamily: "'Nunito', sans-serif;" }}
         >
           {'metaowl'.toUpperCase()}
         </Typography>
-        <Typography color="#eeeae7" sx={{ fontFamily: 'Arial Rounded MT Bold' }}>
+        <Typography color="#eeeae7" sx={{ fontFamily: "'Nunito', sans-serif;", fontWeight: 900 }}>
           {title}
         </Typography>
       </Box>
@@ -53,6 +53,7 @@ function Examples({ isMobile, isTablet }: { isMobile?: boolean; isTablet?: boole
           '> div:not(:last-child)': {
             mr: margin,
           },
+          px: 2,
         }}
       >
         <NFT size={size} src={nft1} title="NO. 4123" />

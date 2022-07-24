@@ -55,7 +55,8 @@ export const StartStop = styled.button<{ isMobile: boolean; played: boolean }>`
   justify-content: center;
   font-size: 30px;
   color: #fff;
-  margin-right: ${({ played }) => played && '10px'};
+  margin-right: ${({ played, isMobile }) => (played || isMobile) && '10px'};
+  -webkit-tap-highlight-color: transparent;
 `;
 
 export const InfoBox = styled.div<{ isMobile: boolean }>`

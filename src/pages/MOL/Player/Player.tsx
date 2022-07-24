@@ -20,6 +20,8 @@ const Player = () => {
 
   const activeTrack = tracks[activeTrackIndex];
 
+  const [hasEverPlayed, setHasEvenPlayed] = useState(false);
+
   const intervalRef = useRef<number | null>(null);
   const audioRef = useRef(new Audio(activeTrack.src));
 
@@ -38,21 +40,25 @@ const Player = () => {
   }, []);
 
   useEffect(() => {
-    audioRef.current.pause();
-    audioRef.current = new Audio(tracks[activeTrackIndex].src);
-    setTrackProgress(audioRef.current.currentTime);
-    audioRef.current.play();
-    startTimer();
-  }, [activeTrackIndex, startTimer]);
+    if (hasEverPlayed) {
+      audioRef.current.pause();
+      audioRef.current = new Audio(tracks[activeTrackIndex].src);
+      setTrackProgress(audioRef.current.currentTime);
+      audioRef.current.play();
+      startTimer();
+    }
+  }, [activeTrackIndex, startTimer, hasEverPlayed]);
 
   function toPrevTrack() {
     setActiveTrackIndex((prev) => (prev <= 0 ? tracks.length - 1 : prev - 1));
     setIsPlaying(true);
+    setHasEvenPlayed(true);
   }
 
   function toNextTrack() {
     setActiveTrackIndex((prev) => (prev >= tracks.length - 1 ? 0 : prev + 1));
     setIsPlaying(true);
+    setHasEvenPlayed(true);
   }
 
   useEffect(() => {
@@ -76,7 +82,16 @@ const Player = () => {
   return (
     <Root isMobile={isMobile}>
       <Progress isMobile={isMobile} value={(100 * trackProgress) / audioRef.current.duration} />
-      <StartStop isMobile={isMobile} played={isPlaying} onClick={() => setIsPlaying((p) => !p)}>
+      <StartStop
+        isMobile={isMobile}
+        played={isPlaying}
+        onClick={() =>
+          setIsPlaying((p) => {
+            setHasEvenPlayed(true);
+            return !p;
+          })
+        }
+      >
         {isPlaying ? <PauseIcon /> : <PlayCircleIcon />}
       </StartStop>
       <ActionsWrapper isMobile={isMobile} played={isPlaying}>
@@ -88,8 +103,8 @@ const Player = () => {
             <Typography
               variant="subtitle1"
               sx={{
-                fontFamily: 'Arial Rounded MT Bold',
-                fontWeight: 600,
+                fontFamily: "'Nunito', sans-serif;",
+                fontWeight: 900,
                 lineHeight: 0.75,
                 color: '#2B2B2B',
               }}
@@ -99,7 +114,7 @@ const Player = () => {
             <Typography
               variant="caption"
               sx={{
-                fontFamily: 'Arial Rounded MT Bold',
+                fontFamily: "'Nunito', sans-serif;",
                 lineHeight: 0,
                 mt: '10px',
                 color: '#898989',
