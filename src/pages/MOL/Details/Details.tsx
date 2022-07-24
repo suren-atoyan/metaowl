@@ -9,7 +9,7 @@ import Examples from './Examples';
 import Title from './Title';
 
 function Details() {
-  const { isMobile } = useScreen();
+  const { isMobile, isTablet } = useScreen();
 
   function getContent() {
     if (!isMobile) {
@@ -35,7 +35,7 @@ function Details() {
         }}
       >
         <Title isMobile={isMobile} sx={{ mb: 10 }} />
-        <Examples isMobile={isMobile} />
+        <Examples isTablet={isTablet} isMobile={isMobile} />
         <About />
       </Box>
     );
@@ -74,7 +74,7 @@ function Details() {
       <Box
         sx={{
           py: '50px',
-          px: isMobile ? 0 : '50px',
+          px: isMobile ? 0 : isTablet ? '25px' : '50px',
           display: 'flex',
           justifyContent: 'space-between',
           position: 'relative',

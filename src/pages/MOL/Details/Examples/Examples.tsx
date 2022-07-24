@@ -16,8 +16,15 @@ const Image = styled('img')({
 function NFT({ src, title, size }: { src: string; title: string; size: string }) {
   return (
     <Box sx={{ display: 'inline-block' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Image style={{ width: size, height: size }} src={src} alt={title} />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          img: { width: size, height: size },
+        }}
+      >
+        <Image src={src} alt={title} />
         <Typography
           color="#eeeae7"
           sx={{ mt: 1, fontSize: 9, fontFamily: 'Arial Rounded MT Bold' }}
@@ -32,9 +39,9 @@ function NFT({ src, title, size }: { src: string; title: string; size: string })
   );
 }
 
-function Examples({ isMobile }: { isMobile?: boolean }) {
-  const margin = isMobile ? '50px' : '3vw';
-  const size = isMobile ? '255px' : '12vw';
+function Examples({ isMobile, isTablet }: { isMobile?: boolean; isTablet?: boolean }) {
+  const margin = isMobile ? '50px' : isTablet ? '3vw' : '3vw';
+  const size = isMobile ? '255px' : isTablet ? '12vw' : '14.8vw';
 
   if (isMobile) {
     return (
@@ -59,7 +66,7 @@ function Examples({ isMobile }: { isMobile?: boolean }) {
   }
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" flex={1}>
+    <Box display="flex" flexDirection="column" alignItems="end" flex={1}>
       <Box
         sx={{
           mb: 5,
