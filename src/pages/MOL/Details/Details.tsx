@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import title from '@/assets/images/details_title.svg';
 import useScreen from '@/utils/useScreen';
 
+import { MOBILE_PLAYER_HEIGHT } from '../Player/styled';
 import About from './About';
 import Examples from './Examples';
 import Title from './Title';
@@ -44,6 +45,7 @@ function Details() {
     <Box
       sx={{
         minHeight: '100%',
+        pb: isMobile ? `${MOBILE_PLAYER_HEIGHT}px` : 0,
         backgroundColor: '#C95962',
         display: isMobile ? 'block' : 'flex',
         alignItems: isMobile ? 'unset' : 'center',

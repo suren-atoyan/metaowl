@@ -5,6 +5,8 @@ import titleMobile from '@/assets/images/title_mobile.svg';
 import trio from '@/assets/images/trio.svg';
 import useScreen from '@/utils/useScreen';
 
+import { MOBILE_PLAYER_HEIGHT } from '../Player/styled';
+
 function Welcome() {
   const { isBigScreen, isMidScreen, isMobile } = useScreen();
 
@@ -13,7 +15,7 @@ function Welcome() {
   return (
     <Box
       sx={{
-        height: '100%',
+        height: isMobile ? `calc(100% - ${MOBILE_PLAYER_HEIGHT}px)` : '100%',
         backgroundColor: '#eeeae7',
         display: 'flex',
         justifyContent: 'center',

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
+export const MOBILE_PLAYER_HEIGHT = 70;
+
 export const Root = styled.div<{ isMobile: boolean }>`
-  height: ${({ isMobile }) => (isMobile ? 70 : 50)}px;
+  height: ${({ isMobile }) => (isMobile ? MOBILE_PLAYER_HEIGHT : 50)}px;
   padding: ${({ isMobile }) => (isMobile ? '5px 20' : 5)}px;
   border-radius: ${({ isMobile }) => (isMobile ? 0 : 50)}px;
   position: fixed;
@@ -56,18 +58,6 @@ export const StartStop = styled.button<{ isMobile: boolean; played: boolean }>`
   margin-right: ${({ played }) => played && '10px'};
 `;
 
-export const NextPrev = styled.button<{ isMobile: boolean }>`
-  z-index: 1;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: ${({ isMobile }) => (isMobile ? 40 : 30)}px;
-`;
-
 export const InfoBox = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex-direction: column;
@@ -80,7 +70,7 @@ export const InfoBox = styled.div<{ isMobile: boolean }>`
 export const ActionsWrapper = styled.div<{ isMobile: boolean; played: boolean }>`
   z-index: 1;
   transition: 0.3s;
-  width: ${({ played, isMobile }) => (played ? (isMobile ? '100vw' : '280px') : '0px')};
+  width: ${({ played, isMobile }) => (isMobile ? '100vw' : played ? '280px' : 0)};
   overflow: hidden;
   flex: 1;
   display: flex;

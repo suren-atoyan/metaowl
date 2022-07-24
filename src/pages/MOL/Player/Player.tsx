@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AiFillPlayCircle, AiOutlinePause } from 'react-icons/ai';
-import { BiSkipNext, BiSkipPrevious } from 'react-icons/bi';
 
+import PauseIcon from '@mui/icons-material/Pause';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import { Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 
 import tracks from '@/assets/tracks';
 import useScreen from '@/utils/useScreen';
 
-import { Actions, ActionsWrapper, InfoBox, NextPrev, Progress, Root, StartStop } from './styled';
+import { Actions, ActionsWrapper, InfoBox, Progress, Root, StartStop } from './styled';
 
 const Player = () => {
   const { isMobile } = useScreen();
@@ -18,11 +21,12 @@ const Player = () => {
   const activeTrack = tracks[activeTrackIndex];
 
   const intervalRef = useRef<number | null>(null);
-  const isReady = useRef(false);
   const audioRef = useRef(new Audio(activeTrack.src));
 
   const startTimer = useCallback(() => {
-    clearInterval(intervalRef.current as number);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
 
     intervalRef.current = setInterval(() => {
       if (audioRef.current.ended) {
@@ -33,14 +37,23 @@ const Player = () => {
     }, 1000);
   }, []);
 
-  const toPrevTrack = () => {
+  useEffect(() => {
+    audioRef.current.pause();
+    audioRef.current = new Audio(tracks[activeTrackIndex].src);
+    setTrackProgress(audioRef.current.currentTime);
+    audioRef.current.play();
+    startTimer();
+  }, [activeTrackIndex, startTimer]);
+
+  function toPrevTrack() {
     setActiveTrackIndex((prev) => (prev <= 0 ? tracks.length - 1 : prev - 1));
     setIsPlaying(true);
-  };
-  const toNextTrack = () => {
+  }
+
+  function toNextTrack() {
     setActiveTrackIndex((prev) => (prev >= tracks.length - 1 ? 0 : prev + 1));
     setIsPlaying(true);
-  };
+  }
 
   useEffect(() => {
     if (isPlaying) {
@@ -52,24 +65,11 @@ const Player = () => {
   }, [isPlaying, startTimer]);
 
   useEffect(() => {
-    if (isPlaying && isReady.current) {
-      audioRef.current.pause();
-      audioRef.current = new Audio(activeTrack.src);
-      setTrackProgress(audioRef.current.currentTime);
-      audioRef.current.play();
-      // stex vor es setIsPlaying(true) dnume em araji angam porcum a avtom play ani chromy chi toxum
-      // hanel em verev next/prev-i jamanak em drel de play/stop knopki depqum parz a vor es kanchvum
-      // menak es mi hat xndir uni. senc vichakum amen play/stop-ic ergy noric a sksum vorovhetev es effecty kancvhum a
-      startTimer();
-    } else {
-      isReady.current = true;
-    }
-  }, [isPlaying, activeTrack, startTimer]);
-
-  useEffect(() => {
     return () => {
       audioRef.current.pause();
-      clearInterval(intervalRef.current as number);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, []);
 
@@ -77,24 +77,40 @@ const Player = () => {
     <Root isMobile={isMobile}>
       <Progress isMobile={isMobile} value={(100 * trackProgress) / audioRef.current.duration} />
       <StartStop isMobile={isMobile} played={isPlaying} onClick={() => setIsPlaying((p) => !p)}>
-        {isPlaying ? <AiOutlinePause /> : <AiFillPlayCircle />}
+        {isPlaying ? <PauseIcon /> : <PlayCircleIcon />}
       </StartStop>
       <ActionsWrapper isMobile={isMobile} played={isPlaying}>
         <Actions isMobile={isMobile}>
-          <NextPrev isMobile={isMobile} onClick={toPrevTrack}>
-            <BiSkipPrevious />
-          </NextPrev>
+          <IconButton onClick={toPrevTrack}>
+            <SkipPreviousIcon />
+          </IconButton>
           <InfoBox isMobile={isMobile}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, lineHeight: 0.75 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontFamily: 'Arial Rounded MT Bold',
+                fontWeight: 600,
+                lineHeight: 0.75,
+                color: '#2B2B2B',
+              }}
+            >
               {activeTrack.title}
             </Typography>
-            <Typography variant="caption" sx={{ lineHeight: 0, mt: '10px' }}>
+            <Typography
+              variant="caption"
+              sx={{
+                fontFamily: 'Arial Rounded MT Bold',
+                lineHeight: 0,
+                mt: '10px',
+                color: '#898989',
+              }}
+            >
               {activeTrack.artist}
             </Typography>
           </InfoBox>
-          <NextPrev isMobile={isMobile} onClick={toNextTrack}>
-            <BiSkipNext />
-          </NextPrev>
+          <IconButton onClick={toNextTrack}>
+            <SkipNextIcon />
+          </IconButton>
         </Actions>
       </ActionsWrapper>
     </Root>
