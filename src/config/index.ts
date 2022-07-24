@@ -4,9 +4,9 @@ import type { Notifications } from './types';
 
 const title = 'metaowl';
 
-const email = 'auther-email@gmail.com';
+const email = 'edmon.atoya.00@gmail.com';
 
-const repository = 'https://github.com/suren-atoyan/metaowl';
+const repository = 'https://github.com/suren-atoyan';
 
 const messages = {
   app: {
