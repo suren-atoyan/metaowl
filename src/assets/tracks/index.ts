@@ -8,7 +8,7 @@ import the_weekdnd from './the_weekdnd.mp3';
 const tracks = [
   {
     title: 'Save Your Tears',
-    artist: 'The Weekdnd',
+    artist: 'The Weeknd',
     src: the_weekdnd,
   },
   {

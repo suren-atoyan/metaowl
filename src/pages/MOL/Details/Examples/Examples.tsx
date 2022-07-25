@@ -10,7 +10,7 @@ import nft6 from '@/assets/images/6.svg';
 
 const Image = styled('img')({
   boxShadow: '0px 7px 18px rgba(0, 0, 0, 0.25)',
-  borderRadius: '17px',
+  borderRadius: '23px',
 });
 
 function NFT({ src, title, size }: { src: string; title: string; size: string }) {
@@ -21,7 +21,7 @@ function NFT({ src, title, size }: { src: string; title: string; size: string })
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          img: { width: size, height: size },
+          img: { width: size, height: 'auto' },
         }}
       >
         <Image src={src} alt={title} />
