@@ -54,13 +54,14 @@ function Examples({ isMobile, isTablet }: { isMobile?: boolean; isTablet?: boole
             mr: margin,
           },
           px: 2,
+          pb: 2,
         }}
       >
         <NFT size={size} src={nft1} title="NO. 4123" />
         <NFT size={size} src={nft2} title="NO. 1010" />
         <NFT size={size} src={nft3} title="NO. 298" />
         <NFT size={size} src={nft4} title="NO. 1212" />
-        <NFT size={size} src={nft5} title="NO. 1010" />
+        <NFT size={size} src={nft5} title="NO. 1429" />
         <NFT size={size} src={nft6} title="NO. 2198" />
       </Box>
     );
@@ -88,7 +89,7 @@ function Examples({ isMobile, isTablet }: { isMobile?: boolean; isTablet?: boole
         }}
       >
         <NFT size={size} src={nft4} title="NO. 1212" />
-        <NFT size={size} src={nft5} title="NO. 1010" />
+        <NFT size={size} src={nft5} title="NO. 1429" />
         <NFT size={size} src={nft6} title="NO. 2198" />
       </Box>
     </Box>

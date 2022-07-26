@@ -48,12 +48,13 @@ export const StartStop = styled.button<{ isMobile: boolean; played: boolean }>`
   cursor: pointer;
   width: ${({ isMobile }) => (isMobile ? 50 : 40)}px;
   height: ${({ isMobile }) => (isMobile ? 50 : 40)}px;
+  max-width: ${({ isMobile }) => (isMobile ? 50 : 40)}px;
+  max-height: ${({ isMobile }) => (isMobile ? 50 : 40)}px;
   border-radius: 50%;
   background: #a31f22;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
   color: #fff;
   margin-right: ${({ played, isMobile }) => (played || isMobile) && '10px'};
   -webkit-tap-highlight-color: transparent;

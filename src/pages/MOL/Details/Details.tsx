@@ -1,6 +1,9 @@
 import Box from '@mui/material/Box';
 
+import axe from '@/assets/images/axe.svg';
 import title from '@/assets/images/details_title.svg';
+import gun from '@/assets/images/gun.svg';
+import oscar from '@/assets/images/oscar.svg';
 import useScreen from '@/utils/useScreen';
 
 import { MOBILE_PLAYER_HEIGHT } from '../Player/styled';
@@ -49,27 +52,69 @@ function Details() {
         backgroundColor: '#C95962',
         display: isMobile ? 'block' : 'flex',
         alignItems: isMobile ? 'unset' : 'center',
+        position: 'relative',
       }}
       id="details"
     >
       {!isMobile && (
-        <Box
-          sx={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 0,
+        <>
+          <Box
+            sx={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 0,
 
-            img: {
-              width: '80%',
-            },
-          }}
-        >
-          <img src={title} alt="details-title" />
-        </Box>
+              img: {
+                width: '80%',
+              },
+            }}
+          >
+            <img src={title} alt="details-title" />
+          </Box>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '14%',
+              top: '5%',
+              width: '20%',
+              height: '20%',
+              display: 'flex',
+              zIndex: 0,
+            }}
+          >
+            <img src={axe} alt="details-title" />
+          </Box>
+          <Box
+            sx={{
+              position: 'absolute',
+              left: '30%',
+              bottom: '5%',
+              width: '20%',
+              height: '20%',
+              display: 'flex',
+              zIndex: 0,
+            }}
+          >
+            <img src={oscar} alt="details-title" />
+          </Box>
+          <Box
+            sx={{
+              position: 'absolute',
+              right: '10%',
+              top: '3%',
+              width: '20%',
+              height: '20%',
+              display: 'flex',
+              zIndex: 0,
+            }}
+          >
+            <img src={gun} alt="details-title" />
+          </Box>
+        </>
       )}
       <Box
         sx={{

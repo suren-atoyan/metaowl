@@ -110,7 +110,13 @@ const Player = () => {
           </IconButton>
           <InfoBox isMobile={isMobile}>
             {isLoading && <CircularProgress size={28} color="info" sx={{ position: 'absolute' }} />}
-            <Box sx={{ filter: `blur(${isLoading ? '1px' : '0px'})` }}>
+            <Box
+              sx={{
+                filter: `blur(${isLoading ? '1px' : '0px'})`,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
               <Typography
                 variant="subtitle1"
                 sx={{

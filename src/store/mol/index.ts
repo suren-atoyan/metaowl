@@ -21,15 +21,13 @@ function usePageSwitcher(): [Pages, Actions] {
     setActivePage(page);
     setStopObserver(true);
 
+    const pageElement = document.getElementById(page);
+    pageElement?.scrollIntoView({ behavior: 'smooth' });
+
     setTimeout(() => {
       setStopObserver(false);
     }, 350);
   }
-
-  useEffect(() => {
-    const page = document.getElementById(activePage);
-    page?.scrollIntoView({ behavior: 'smooth' });
-  }, [activePage]);
 
   useEffect(() => {
     const welcomePage = document.getElementById(Pages.Welcome) as HTMLElement;
