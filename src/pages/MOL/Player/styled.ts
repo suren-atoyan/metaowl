@@ -62,6 +62,9 @@ export const StartStop = styled.button<{ isMobile: boolean; played: boolean }>`
 export const InfoBox = styled.div<{ isMobile: boolean }>`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   & span {
     opacity: 0.8;
     font-size: ${({ isMobile }) => (isMobile ? 14 : 10)}px;

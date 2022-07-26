@@ -5,6 +5,8 @@ import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 
 import tracks from '@/assets/tracks';
@@ -15,6 +17,7 @@ import { Actions, ActionsWrapper, InfoBox, Progress, Root, StartStop } from './s
 const Player = () => {
   const { isMobile } = useScreen();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
   const [activeTrackIndex, setActiveTrackIndex] = useState(0);
 
@@ -49,16 +52,22 @@ const Player = () => {
     }
   }, [activeTrackIndex, startTimer, hasEverPlayed]);
 
+  useEffect(() => {
+    setIsLoading(isPlaying && audioRef.current?.readyState !== 4);
+  }, [isPlaying, activeTrackIndex, audioRef.current?.readyState]);
+
   function toPrevTrack() {
     setActiveTrackIndex((prev) => (prev <= 0 ? tracks.length - 1 : prev - 1));
     setIsPlaying(true);
     setHasEvenPlayed(true);
+    setTrackProgress(0);
   }
 
   function toNextTrack() {
     setActiveTrackIndex((prev) => (prev >= tracks.length - 1 ? 0 : prev + 1));
     setIsPlaying(true);
     setHasEvenPlayed(true);
+    setTrackProgress(0);
   }
 
   useEffect(() => {
@@ -100,28 +109,31 @@ const Player = () => {
             <SkipPreviousIcon />
           </IconButton>
           <InfoBox isMobile={isMobile}>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontFamily: "'Nunito', sans-serif;",
-                fontWeight: 900,
-                lineHeight: 0.75,
-                color: '#2B2B2B',
-              }}
-            >
-              {activeTrack.title}
-            </Typography>
-            <Typography
-              variant="caption"
-              sx={{
-                fontFamily: "'Nunito', sans-serif;",
-                lineHeight: 0,
-                mt: '10px',
-                color: '#898989',
-              }}
-            >
-              {activeTrack.artist}
-            </Typography>
+            {isLoading && <CircularProgress size={28} color="info" sx={{ position: 'absolute' }} />}
+            <Box sx={{ filter: `blur(${isLoading ? '1px' : '0px'})` }}>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontFamily: "'Nunito', sans-serif;",
+                  fontWeight: 900,
+                  lineHeight: 0.75,
+                  color: '#2B2B2B',
+                }}
+              >
+                {activeTrack.title}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  fontFamily: "'Nunito', sans-serif;",
+                  lineHeight: 0,
+                  mt: '10px',
+                  color: '#898989',
+                }}
+              >
+                {activeTrack.artist}
+              </Typography>
+            </Box>
           </InfoBox>
           <IconButton onClick={toNextTrack}>
             <SkipNextIcon />
