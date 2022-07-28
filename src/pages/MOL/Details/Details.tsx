@@ -53,6 +53,7 @@ function Details() {
         display: isMobile ? 'block' : 'flex',
         alignItems: isMobile ? 'unset' : 'center',
         position: 'relative',
+        overflow: 'hidden',
       }}
       id="details"
     >
