@@ -26,7 +26,11 @@ const Player = () => {
   const [hasEverPlayed, setHasEvenPlayed] = useState(false);
 
   const intervalRef = useRef<number | null>(null);
-  const audioRef = useRef(new Audio(activeTrack.src));
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  if (!audioRef.current) {
+    audioRef.current = new Audio(activeTrack.src);
+  }
 
   const startTimer = useCallback(() => {
     if (intervalRef.current) {
@@ -34,17 +38,17 @@ const Player = () => {
     }
 
     intervalRef.current = setInterval(() => {
-      if (audioRef.current.ended) {
+      if (audioRef.current?.ended) {
         toNextTrack();
       } else {
-        setTrackProgress(audioRef.current.currentTime);
+        setTrackProgress(audioRef.current?.currentTime as number);
       }
     }, 1000);
   }, []);
 
   useEffect(() => {
     if (hasEverPlayed) {
-      audioRef.current.pause();
+      audioRef.current?.pause();
       audioRef.current = new Audio(tracks[activeTrackIndex].src);
       setTrackProgress(audioRef.current.currentTime);
       audioRef.current.play();
@@ -72,16 +76,16 @@ const Player = () => {
 
   useEffect(() => {
     if (isPlaying) {
-      audioRef.current.play();
+      audioRef.current?.play();
       startTimer();
     } else {
-      audioRef.current.pause();
+      audioRef.current?.pause();
     }
   }, [isPlaying, startTimer]);
 
   useEffect(() => {
     return () => {
-      audioRef.current.pause();
+      audioRef.current?.pause();
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
